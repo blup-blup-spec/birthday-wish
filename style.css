@@ -570,22 +570,6 @@ body::after {
     }
 }
 
-/* BIGGER CAROUSEL - FIXED OVERLAP */
-.scene {
-    width: 500px !important;
-    height: 650px !important;
-}
-
-.carousel__cell {
-    width: 450px !important;
-    height: 600px !important;
-    left: 25px !important;
-    top: 25px !important;
-    cursor: pointer !important;
-    border: 2px solid var(--accent-color) !important;
-    box-shadow: 0 10px 40px rgba(255, 107, 157, 0.4) !important;
-}
-
 /* PHOTO GRID FOR 3 COUPLE PHOTOS */
 .photo-grid {
     display: grid;
