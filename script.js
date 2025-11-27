@@ -56,7 +56,7 @@ const follower = document.querySelector('.cursor-follower');
 document.addEventListener('mousemove', (e) => {
     cursor.style.left = e.clientX + 'px';
     cursor.style.top = e.clientY + 'px';
-    
+
     setTimeout(() => {
         follower.style.left = e.clientX + 'px';
         follower.style.top = e.clientY + 'px';
@@ -72,3 +72,47 @@ document.addEventListener('mouseup', () => {
     cursor.style.transform = 'scale(1)';
     follower.style.transform = 'scale(1)';
 });
+
+// Modal Logic
+const wishCard = document.getElementById('wishCard');
+const blessingCard = document.getElementById('blessingCard');
+const chatModal = document.getElementById('chatModal');
+const blessingModal = document.getElementById('blessingModal');
+const closeButtons = document.querySelectorAll('.close-modal');
+
+function openModal(modal) {
+    modal.classList.add('active');
+    if (modal === chatModal) {
+        animateMessages();
+    }
+}
+
+function closeModal(modal) {
+    modal.classList.remove('active');
+}
+
+wishCard.addEventListener('click', () => openModal(chatModal));
+blessingCard.addEventListener('click', () => openModal(blessingModal));
+
+closeButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        closeModal(e.target.closest('.modal-overlay'));
+    });
+});
+
+// Close on outside click
+window.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal-overlay')) {
+        closeModal(e.target);
+    }
+});
+
+// Animate Chat Messages
+function animateMessages() {
+    const messages = document.querySelectorAll('.message');
+    messages.forEach((msg, index) => {
+        msg.style.animation = 'none';
+        msg.offsetHeight; /* trigger reflow */
+        msg.style.animation = `slideIn 0.5s ease forwards ${index * 1.5}s`;
+    });
+}
