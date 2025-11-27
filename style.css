@@ -107,37 +107,67 @@ body::after {
 .title-3d {
     font-family: var(--font-heading);
     font-size: 6rem;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--accent-color);
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-secondary), var(--accent-gold));
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     position: relative;
     text-transform: uppercase;
-    letter-spacing: 8px;
-    animation: float 4s ease-in-out infinite;
-    text-shadow: 0 0 30px var(--accent-glow);
+    letter-spacing: 12px;
+    animation: float 4s ease-in-out infinite, gradientShift 3s ease infinite;
+    filter: drop-shadow(0 0 30px var(--accent-glow)) drop-shadow(0 0 60px var(--accent-secondary));
+    transform-style: preserve-3d;
 }
 
 .title-3d::before {
     content: attr(data-text);
     position: absolute;
+    left: 3px;
+    top: 3px;
+    z-index: -1;
+    background: linear-gradient(45deg, rgba(255, 107, 157, 0.3), rgba(192, 110, 241, 0.3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: blur(8px);
+}
+
+.title-3d::after {
+    content: attr(data-text);
+    position: absolute;
     left: 0;
     top: 0;
-    width: 0;
-    height: 100%;
-    color: var(--accent-color);
-    overflow: hidden;
-    transition: width 1s ease;
-    border-right: 2px solid var(--accent-color);
-    animation: type 3s steps(14) forwards;
+    z-index: -2;
+    background: rgba(0, 0, 0, 0.8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: translateZ(-20px);
 }
 
 .subtitle {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    color: var(--accent-color);
+    animation: fadeIn 2s ease;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 8%;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     opacity: 0.7;
     animation: bounce 2s infinite;
     letter-spacing: 2px;
     text-transform: uppercase;
+    color: var(--accent-secondary);
 }
 
 /* Floating Shapes */
@@ -544,6 +574,18 @@ body::after {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
     }
 }
 
